@@ -1,6 +1,12 @@
-html, body {
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  font-family: '等线', 'DengXian', sans-serif;
+}
+
+body {
+  background-color: #141414;
 }
 
 .nowrap {
@@ -26,4 +32,25 @@ html, body {
     width: 1000px;
     margin: 0 auto;
   }
+}
+
+.panel {
+  max-height: calc(100vh - 145px);
+  border-radius: 0.25rem;
+  overflow-y: auto;
+}
+.panel:hover {
+  --scrollbar-thumb-color: #595959;
+}
+.panel::-webkit-scrollbar {
+  width: 10px;
+}
+.panel::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 4px;
+  border-left: 4px solid transparent;
+  background-clip: padding-box;
+}
+.panel::-webkit-scrollbar-thumb:hover {
+  background-color: #8c8c8c;
 }

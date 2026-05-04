@@ -1,31 +1,54 @@
-import { Layout } from 'antd'
+import { Layout, ConfigProvider, theme } from 'antd'
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Player from './components/Player'
-import Search from './pages/Search'
 import ErrorBoundary from './components/ErrorBoundary'
+import Loading from '@/components/ui/loading'
 import './App.css'
+
+const Home = lazy(() => import('./pages/home/Home'))
+const Search = lazy(() => import('./pages/Search'))
 const { Content } = Layout
 
 function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <Layout>
-          <Header />
-          <Content
-            className="container"
-            style={{
-              marginTop: 59,
-              marginBottom: 74,
-            }}
-          >
-            <Routes>
-              <Route path="search/:keyword" element={<Search />} />
-            </Routes>
-          </Content>
-          <Player />
-        </Layout>
+        <ConfigProvider
+          theme={{
+            algorithm: theme.darkAlgorithm,
+            token: {
+              colorPrimary: '#FFA500',
+              colorLink: '#ffffff',
+              colorLinkHover: 'orange',
+            },
+            components: {
+              Menu: {
+                itemPaddingInline: 10,
+              },
+            },
+          }}
+        >
+          <Layout>
+            <Header />
+            <Content
+              className="container"
+              style={{
+                marginTop: 59,
+                marginBottom: 74,
+              }}
+            >
+              <Suspense fallback={<Loading />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="search/:keyword" element={<Search />} />
+                </Routes>
+              </Suspense>
+            </Content>
+            <Player />
+          </Layout>
+        </ConfigProvider>
       </BrowserRouter>
     </ErrorBoundary>
   )
