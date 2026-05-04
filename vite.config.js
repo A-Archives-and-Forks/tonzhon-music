@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
+import tailwindcss from '@tailwindcss/vite'
+import { resolve } from 'node:path'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://tonzhon.whamon.com/',
+        changeOrigin: true,
+      },
     },
   },
   build: {
@@ -38,12 +47,6 @@ export default defineConfig({
   // 依赖预构建优化：明确指定需要预构建的依赖
   // 这可以避免首次启动时的依赖发现过程，提升开发服务器启动速度
   optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'antd',
-      'lucide-react',
-    ],
+    include: ['react', 'react-dom', 'react-router-dom', 'antd', 'lucide-react'],
   },
 })
