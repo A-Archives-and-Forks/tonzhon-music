@@ -1,0 +1,14 @@
+.song-item {
+  padding: 4px 10px;
+  user-select: none;
+}
+
+.song-item:hover {
+  .hover-to-show {
+    opacity: 1;
+  }
+}
+
+.hover-to-show {
+  opacity: 0;
+}

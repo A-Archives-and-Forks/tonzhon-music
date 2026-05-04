@@ -1,17 +1,10 @@
-import SongItem from './SongItem'
+import SongItemWithCover from '@/components/song-item/SongItemWithCover'
 
 function SongList({ songs }) {
   return (
-    <ol
-      className="song-list"
-      style={{
-        margin: 0,
-        padding: 0,
-        listStyle: 'none',
-      }}
-    >
+    <ol>
       {songs.map((song) => (
-        <SongItem key={`${song.platform}-${song.originalId}`} song={song} />
+        <SongItemWithCover key={song.newId} song={song} />
       ))}
     </ol>
   )
