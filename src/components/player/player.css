@@ -1,0 +1,48 @@
+#player {
+  bottom: 0px;
+  /* // padding: 8px 0; */
+  width: 100%;
+
+  .ant-slider .ant-slider-handle {
+    opacity: 0;
+  }
+
+  .ant-slider:hover {
+    .ant-slider-handle {
+      opacity: 1;
+    }
+  }
+
+  #below-progress-slider {
+    /* background: linear-gradient(rgba(128, 128, 128, 0.1) 0%, black 100%); */
+    background: #202020;
+    color: white;
+    padding: 8px 20px;
+  }
+
+  #song-name-in-player {
+    color: #f0f0f0;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+
+  #time-in-player {
+    width: 140px;
+    color: #bfbfbf;
+    text-align: right;
+  }
+
+  .central-icon-in-player {
+    font-size: 40px;
+    margin: 0 12px;
+    color: orange;
+  }
+
+  .error-icon-in-player {
+    color: #ff4d4f;
+  }
+
+  .is-on {
+    color: #52c41a;
+  }
+}

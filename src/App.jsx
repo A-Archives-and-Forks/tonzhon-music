@@ -2,9 +2,10 @@ import { Layout, ConfigProvider, theme } from 'antd'
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
-import Player from './components/Player'
+import Player from './components/player/player'
 import ErrorBoundary from './components/ErrorBoundary'
 import Loading from '@/components/ui/loading'
+import { SongSourceModalProvider } from '@/contexts/SongSourceModalContext'
 import './App.css'
 
 const Home = lazy(() => import('./pages/home/Home'))
@@ -15,40 +16,42 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <ConfigProvider
-          theme={{
-            algorithm: theme.darkAlgorithm,
-            token: {
-              colorPrimary: '#FFA500',
-              colorLink: '#ffffff',
-              colorLinkHover: 'orange',
-            },
-            components: {
-              Menu: {
-                itemPaddingInline: 10,
+        <SongSourceModalProvider>
+          <ConfigProvider
+            theme={{
+              algorithm: theme.darkAlgorithm,
+              token: {
+                colorPrimary: '#FFA500',
+                colorLink: '#ffffff',
+                colorLinkHover: 'orange',
               },
-            },
-          }}
-        >
-          <Layout>
-            <Header />
-            <Content
-              className="container"
-              style={{
-                marginTop: 59,
-                marginBottom: 74,
-              }}
-            >
-              <Suspense fallback={<Loading />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="search/:keyword" element={<Search />} />
-                </Routes>
-              </Suspense>
-            </Content>
-            <Player />
-          </Layout>
-        </ConfigProvider>
+              components: {
+                Menu: {
+                  itemPaddingInline: 10,
+                },
+              },
+            }}
+          >
+            <Layout>
+              <Header />
+              <Content
+                className="container"
+                style={{
+                  marginTop: 59,
+                  marginBottom: 74,
+                }}
+              >
+                <Suspense fallback={<Loading />}>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="search/:keyword" element={<Search />} />
+                  </Routes>
+                </Suspense>
+              </Content>
+              <Player />
+            </Layout>
+          </ConfigProvider>
+        </SongSourceModalProvider>
       </BrowserRouter>
     </ErrorBoundary>
   )
