@@ -5,6 +5,10 @@
   font-family: '等线', 'DengXian', sans-serif;
 }
 
+*:not(a):not(svg):not(svg *) {
+  color: #f0f0f0;
+}
+
 body {
   background-color: #141414;
 }
